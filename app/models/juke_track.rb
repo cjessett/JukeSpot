@@ -1,5 +1,5 @@
 class JukeTrack < ApplicationRecord
-  belongs_to :party
+  belongs_to :party, touch: true
   belongs_to :track
   has_many :votes
   after_touch :update_status
