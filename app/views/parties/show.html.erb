@@ -33,11 +33,11 @@
         <% @playlist.tracks.each do |track|  %>
           <li class="list-group-item list-group-item-action">
             <%= track.name %>
-            <span class='button'>
-              <button type="button" class="btn btn-success" aria-label="Left Align">
+            <span class='vote-buttons'>
+              <button type="button" class="btn btn-success" >
                 <span class="octicon octicon-arrow-up"></span>
               </button>
-              <button type="button" class="btn btn-danger" aria-label="Left Align">
+              <button type="button" class="btn btn-danger" >
                 <span class="octicon octicon-arrow-down"></span>
               </button>
             </span>
