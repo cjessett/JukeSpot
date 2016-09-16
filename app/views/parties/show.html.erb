@@ -20,7 +20,6 @@
   <% end %>
   <!-- Tracks -->
   <div class="row">
-
     <!-- staged -->
     <div class="col-xs-6">
       <h2>Staged</h2>
@@ -30,10 +29,12 @@
     <div class="col-xs-6">
       <h2>Active</h2>
       <ul class="list-group">
-      <% @playlist.tracks.each do |track|  %>
-        <li class="list-group-item list-group-item-action"">
-          <%= track.name %>
-        </li>
+      <% if @playlist.tracks %>
+        <% @playlist.tracks.each do |track|  %>
+          <li class="list-group-item list-group-item-action"">
+            <%= track.name %>
+          </li>
+        <% end %>
       <% end %>
       </ul>
     </div>
