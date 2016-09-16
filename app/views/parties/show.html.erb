@@ -32,6 +32,14 @@
         <% @party.active_tracks.each do |active_track|  %>
           <li class="list-group-item list-group-item-action"">
             <%= active_track.track.name %>
+            <span class='pull-xs-right'>
+              <button type="button" class="btn btn-success" >
+                <span class="octicon octicon-arrow-up"></span>
+              </button>
+              <button type="button" class="btn btn-danger" >
+                <span class="octicon octicon-arrow-down"></span>
+              </button>
+            </span>
           </li>
         <% end %>
       <% end %>
@@ -65,5 +73,3 @@
       </div>
   </div>
 </div>
-
-<%= console %>
