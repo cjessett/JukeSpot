@@ -19,6 +19,13 @@ class PartiesController < ApplicationController
     redirect_to @party
   end
 
+  def new_playlist
+    @party = Party.find(params[:party_id])
+    @playlist = spotify_user.create_playlist!(@party.name)
+    @party.update(spotify_playlist_id: @playlist.id)
+    redirect_to @party
+  end
+
   private
   def party_params
     params.required(:party).permit(:name, :threshold)
