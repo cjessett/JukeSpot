@@ -20,17 +20,28 @@
   <% end %>
   <!-- Tracks -->
   <div class="row">
+
+    <!-- staged -->
     <div class="col-xs-6">
       <h2>Staged</h2>
     </div>
+
+    <!-- active -->
     <div class="col-xs-6">
       <h2>Active</h2>
+      <ul class="list-group">
+      <% @playlist.tracks.each do |track|  %>
+        <li class="list-group-item list-group-item-action"">
+          <%= track.name %>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- Import playlist Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -44,7 +55,10 @@
       <% if spotify_user.playlists %>
         <ul class="list-group">
           <% spotify_user.playlists.each do |playlist| %>
-            <%= link_to playlist.name, "/parties/#{@party.id}/playlists/import/#{playlist.id}", class:"list-group-item list-group-item-action" %>
+            <%= button_to playlist.name, {action: "import", party_id: @party.id },
+                                          method: :patch,
+                                          params: { playlist_id: playlist.id, owner_id: playlist.owner.id },
+                                          class:"list-group-item list-group-item-action" %>
           <% end %>
         </ul>
       <% end %>
@@ -52,4 +66,5 @@
   </div>
 </div>
 
+<%= console %>
 
