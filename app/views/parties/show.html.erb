@@ -3,7 +3,7 @@
   <!-- Party Title -->
   <h2><%= @party.name %></h2>
 
-  <!-- New Playlist created alert -->
+
   <% if @party.spotify_playlist_id && @party.juke_tracks.empty? %>
     <div class="row">
       <div class="alert alert-success col-md-6 offset-md-3" role="alert">
@@ -28,6 +28,26 @@
     <!-- staged -->
     <div class="col-xs-6">
       <h2>Staged</h2>
+      <ul class="list-group">
+      <% if @party.staged_tracks %>
+        <% @party.staged_tracks.each do |staged_track|  %>
+          <li class="list-group-item list-group-item-action">
+            <%= staged_track.track.name %> : <font color=blue><%= staged_track.points %></font>
+            <span class='pull-xs-right'>
+
+            <%= link_to "/juke_tracks/#{staged_track.id}/vote_up", class:"btn btn-success", role:"button" do %>
+                <span class="octicon octicon-arrow-up"></span>
+              <% end %>
+
+             <%= link_to "/juke_tracks/#{staged_track.id}/vote_down", class:"btn btn-danger", role:"button" do %>
+              <span class="octicon octicon-arrow-down"></span>
+            <% end %>
+
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+      </ul>
     </div>
 
     <!-- active -->
@@ -36,15 +56,18 @@
       <ul class="list-group">
       <% if @party.active_tracks %>
         <% @party.active_tracks.each do |active_track|  %>
-          <li class="list-group-item list-group-item-action"">
-            <%= active_track.track.name %>
+          <li class="list-group-item list-group-item-action">
+            <%= active_track.track.name %> : <font color=blue><%= active_track.points %></font>
             <span class='pull-xs-right'>
-              <button type="button" class="btn btn-success" >
+
+            <%= link_to "/juke_tracks/#{active_track.id}/vote_up", class:"btn btn-success", role:"button" do %>
                 <span class="octicon octicon-arrow-up"></span>
-              </button>
-              <button type="button" class="btn btn-danger" >
-                <span class="octicon octicon-arrow-down"></span>
-              </button>
+              <% end %>
+
+             <%= link_to "/juke_tracks/#{active_track.id}/vote_down", class:"btn btn-danger", role:"button" do %>
+              <span class="octicon octicon-arrow-down"></span>
+            <% end %>
+
             </span>
           </li>
         <% end %>
@@ -79,6 +102,4 @@
       </div>
   </div>
 </div>
-
-
 
