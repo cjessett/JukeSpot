@@ -14,4 +14,8 @@ class Party < ApplicationRecord
   def active_tracks
     juke_tracks.where(active: true)
   end
+
+  def staged_tracks
+    juke_tracks.where(active: false)
+  end
 end
