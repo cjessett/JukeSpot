@@ -4,6 +4,14 @@ class Party < ApplicationRecord
   has_many :juke_tracks
 
   def host
-    memberships.where(type: "host").first.user
+    memberships.where(host: true).first.user
+  end
+
+  def playlist
+    RSpotify::Playlist.find(playlist_owner_id, spotify_playlist_id) if spotify_playlist_id && playlist_owner_id
+  end
+
+  def active_tracks
+    juke_tracks.where(active: true)
   end
 end

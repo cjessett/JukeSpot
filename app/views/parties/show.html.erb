@@ -28,10 +28,10 @@
     <div class="col-xs-6">
       <h2>Active</h2>
       <ul class="list-group">
-      <% if @playlist && @playlist.tracks %>
-        <% @playlist.tracks.each do |track|  %>
+      <% if @party.active_tracks %>
+        <% @party.active_tracks.each do |active_track|  %>
           <li class="list-group-item list-group-item-action"">
-            <%= track.name %>
+            <%= active_track.track.name %>
           </li>
         <% end %>
       <% end %>
@@ -58,7 +58,7 @@
             <%= button_to playlist.name, {action: "import", party_id: @party.id },
                                           method: :patch,
                                           params: { playlist_id: playlist.id, owner_id: playlist.owner.id },
-                                          class:"list-group-item list-group-item-action" %>
+                                          class:"list-group-item list-group-item-action" %></li>
           <% end %>
         </ul>
       <% end %>
@@ -66,3 +66,4 @@
   </div>
 </div>
 
+<%= console %>
