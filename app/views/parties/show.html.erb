@@ -4,6 +4,7 @@
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Import Playlist
     </button>
+    <%= link_to 'Create A New Spotify Playlist', "/parties/#{@party.id}/new_playlist", class:"btn btn-success btn-lg", role:"button", method:'patch' %>
   </div>
   <!-- Tracks -->
   <div class="row">
