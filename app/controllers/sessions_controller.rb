@@ -1,10 +1,10 @@
-class UsersController < ApplicationController
+class SessionsController < ApplicationController
 
-  def profile
-    render 'profile'
+
+  def new
   end
 
-  def spotify
+  def create
     session[:spotify] = env['omniauth.auth']
     user = User.find_or_create_by(spotify_id: spotify_user.id)
     user.update(session_params)
