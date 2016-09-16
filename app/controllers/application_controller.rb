@@ -1,16 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user
+  helper_method :current_user, :spotify_user
 
   def home
     render 'home/index'
   end
 
-  private
+  def logout
+    session.clear
+    redirect_to '/'
+  end
 
+  private
   def current_user
-    if session[:spotify]
-      @current_user ||= RSpotify::User.new(session[:spotify])
-    end
+    @current_user ||= User.find(session[:user_id])
+  end
+
+  def spotify_user
+    @spotify_user ||= RSpotify::User.new(session[:spotify]) if session[:spotify]
   end
 end
