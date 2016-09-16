@@ -1,19 +1,17 @@
 class UsersController < ApplicationController
   def spotify
-    @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    # Now you can access user's private data, create playlists and much more
+    session[:spotify] = env['omniauth.auth']
+    user = User.find_or_create_by(spotify_id: spotify_user.id)
+    user.update(creds(user))
+    session[:user_id] = user.id
+    redirect_to '/profile'
+  end
 
-    # Access private data
-    # spotify_user.country #=> "US"
-    # spotify_user.email   #=> "example@email.com"
+  def profile
+    render 'profile'
+  end
 
-    # Create playlist in user's Spotify account
-    # playlist = spotify_user.create_playlist!('my-awesome-playlist')
-
-    # Add tracks to a playlist in user's Spotify account
-    # tracks = RSpotify::Track.search('Know')
-    # playlist.add_tracks!(tracks)
-    # playlist.tracks.first.name #=> "Somebody That I Used To Know"
-    render 'home/index'
+  def creds(user)
+    spotify_user.credentials.select{ |k,v| ["token", "refresh_token"].include? k }
   end
 end

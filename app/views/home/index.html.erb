@@ -1,9 +1,4 @@
 hello
 <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
 
-<% if @spotify_user %>
-  <h2><%= @spotify_user.email %></h2>
-  <% @spotify_user.playlists.each do |list| %>
-    <li><%= list.name %></li>
-  <% end %>
-<% end %>
+
