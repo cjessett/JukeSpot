@@ -4,7 +4,7 @@ class PartiesController < ApplicationController
 
   def create
     @party = current_user.parties.create(party_params)
-    @party.update(host: current_user)
+    @party.memberships.where(user_id: current_user).first.update(type: "host")
     redirect_to @party
   end
 
