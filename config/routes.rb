@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   get '/profile' => 'users#profile'
 
   # auth routes
-  get '/auth/spotify/callback' => 'users#spotify'
+get '/auth/spotify/callback' => 'sessions#create'
 
-  get '/logout' => 'application#logout'
+  delete '/logout' => 'sessions#destroy'
 
   root 'application#home'
 end

@@ -11,14 +11,4 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
     redirect_to '/profile'
   end
-
-  def destroy
-    session.clear
-    redirect_to root_path
-  end
-
-  private
-  def session_params
-    spotify_user.credentials.select{ |k,v| ["token", "refresh_token"].include? k }
-  end
 end
