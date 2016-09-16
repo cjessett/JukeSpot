@@ -22,7 +22,7 @@ class PartiesController < ApplicationController
   def new_playlist
     @party = Party.find(params[:party_id])
     @playlist = spotify_user.create_playlist!(@party.name)
-    @party.update(spotify_playlist_id: @playlist.id)
+    @party.update(spotify_playlist_id: @playlist.id, playlist_owner_id: spotify_user.id)
     redirect_to @party
   end
 
