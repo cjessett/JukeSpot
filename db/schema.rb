@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916014915) do
+ActiveRecord::Schema.define(version: 20160916164559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "juke_tracks", force: :cascade do |t|
+    t.integer  "track_id"
+    t.integer  "party_id"
+    t.string   "type"
+    t.boolean  "import"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_id"], name: "index_juke_tracks_on_party_id", using: :btree
+    t.index ["track_id"], name: "index_juke_tracks_on_track_id", using: :btree
+  end
 
   create_table "memberships", force: :cascade do |t|
     t.integer "user_id"
@@ -26,6 +37,13 @@ ActiveRecord::Schema.define(version: 20160916014915) do
   create_table "parties", force: :cascade do |t|
     t.string  "name"
     t.integer "threshold"
+    t.string  "spotify_playlist_id"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer  "spotify_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
