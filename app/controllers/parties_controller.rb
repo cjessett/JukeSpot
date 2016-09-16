@@ -3,7 +3,7 @@ class PartiesController < ApplicationController
   end
 
   def create
-    @party = current_user.parties.new(party_params)
+    @party = current_user.parties.create(party_params)
     @party.save
     redirect_to @party
   end
