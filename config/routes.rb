@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :parties do
-    get '/playlists/import/:id' => 'playlists#import'
-  end
+  resources :parties
+  patch '/parties/:party_id/import' => 'parties#import'
 
   get '/profile' => 'users#profile'
 

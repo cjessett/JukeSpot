@@ -4,12 +4,19 @@ class PartiesController < ApplicationController
 
   def create
     @party = current_user.parties.create(party_params)
-    @party.save
+    @party.update(host: current_user)
     redirect_to @party
   end
 
   def show
     @party = Party.find(params[:id])
+    @playlist = RSpotify::Playlist.find(@party.playlist_owner_id, @party.spotify_playlist_id) if @party.spotify_playlist_id
+  end
+
+  def import
+    @party = Party.find params[:party_id]
+    @party.update(spotify_playlist_id: params[:playlist_id], playlist_owner_id: params[:owner_id])
+    redirect_to @party
   end
 
   private
