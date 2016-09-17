@@ -14,14 +14,14 @@ class PartiesController < ApplicationController
   end
 
   def import
-    @party = Party.find params[:party_id]
+    @party = Party.find params[:id]
     @party.update(spotify_playlist_id: params[:playlist_id], playlist_owner_id: params[:owner_id])
     import_tracks
     redirect_to @party
   end
 
   def new_playlist
-    @party = Party.find(params[:party_id])
+    @party = Party.find(params[:id])
     @playlist = spotify_user.create_playlist!(@party.name)
     @party.update(spotify_playlist_id: @playlist.id, playlist_owner_id: spotify_user.id)
     redirect_to @party
