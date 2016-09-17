@@ -4,6 +4,10 @@ class Party < ApplicationRecord
   has_many :juke_tracks
   after_touch :update_playlist
 
+  def update_playlist
+    self.playlist.replace_tracks!(self.build_spotify_tracks)
+  end
+
   def host
     memberships.where(host: true).first.user
   end
@@ -22,11 +26,8 @@ class Party < ApplicationRecord
 
   def build_spotify_tracks
     self.active_tracks.map do |juke_track|
-      RSpotify::Track.find(juke_tracks.track.spotify_id)
+      RSpotify::Track.find(juke_track.track.spotify_id)
     end
   end
 
-  def update_playlist
-    self.playlist.replace_tracks!(build_spotify_tracks)
-  end
 end

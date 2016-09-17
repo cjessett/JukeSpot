@@ -7,6 +7,7 @@ class JukeTrack < ApplicationRecord
   def update_status
     self.active = self.points >= self.party.threshold
     self.save
+    self.party.touch
   end
 
   def handicap
