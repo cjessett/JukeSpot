@@ -1,2 +1,15 @@
-<%= link_to 'Login with Spotify', '/auth/spotify', class:"btn btn-success btn-lg btn-block", role:"button" %>
+
+<div class="jumbotron spotify-login">
+  <h1 class="display-3 center-text">Democratize your Music <br> with JukeSpot!</h1>
+  <p class="lead center-text">
+    Create or import playlists from Spotify. <br>
+    Then invite friends to vote on the tracks and watch the playlist update live!
+  </p>
+  <hr class="m-y-2">
+  <div class="row lead">
+    <%= link_to 'Login with Spotify',
+                '/auth/spotify',
+                class:"btn btn-success btn-lg col-xs-8 offset-xs-2 col-md-6 offset-md-3" %>
+  </div>
+</div>
 

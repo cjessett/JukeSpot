@@ -14,3 +14,10 @@
  *= require_self
  */
 
+.spotify-login {
+  margin-top: 5em;
+}
+
+.center-text {
+  text-align: center;
+}
