@@ -4,15 +4,16 @@
   <h2><%= @party.name %></h2>
 
   <!-- Created new playlist alert -->
-  <% if @party.spotify_playlist_id && @party.juke_tracks.empty? %>
+  <% if flash[:notice] %>
     <div class="row">
-      <div class="alert alert-success col-md-6 offset-md-3" role="alert">
-        Well done! Check your playlists on Spotify!
+      <div class="alert alert-success col-md-12" role="alert">
+        <%= flash[:notice] %>
       </div>
     </div>
+  <% end %>
 
   <!-- Import and Create playlist buttons -->
-  <% elsif !@party.spotify_playlist_id %>
+  <% if !@party.spotify_playlist_id %>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importPlaylistModal">
       Import Playlist
     </button>

@@ -5,7 +5,7 @@ class PartiesController < ApplicationController
   def create
     @party = current_user.parties.create(party_params)
     @party.memberships.where(user_id: current_user).first.update(host: true)
-    redirect_to @party
+    redirect_to @party, notice: "New party created! Import or create a new playlist"
   end
 
   def show
@@ -17,14 +17,14 @@ class PartiesController < ApplicationController
     @party = Party.find params[:id]
     @party.update(spotify_playlist_id: params[:playlist_id], playlist_owner_id: params[:owner_id])
     import_tracks
-    redirect_to @party
+    redirect_to @party, notice: "imported #{@party.playlist.name} from Spotify!"
   end
 
   def new_playlist
     @party = Party.find(params[:id])
     @playlist = spotify_user.create_playlist!(@party.name)
     @party.update(spotify_playlist_id: @playlist.id, playlist_owner_id: spotify_user.id)
-    redirect_to @party
+    redirect_to @party, notice: "'#{@party.name}' playlist created!"
   end
 
   private
