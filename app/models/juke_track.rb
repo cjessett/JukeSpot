@@ -1,7 +1,11 @@
 class JukeTrack < ApplicationRecord
+  scope :active, -> { where(active: true) }
+  scope :staged, -> { where(active: false) }
+
   belongs_to :party, touch: true
   belongs_to :track
   has_many :votes
+
   after_touch :update_status
 
   def update_status

@@ -1,8 +1,10 @@
 class Party < ApplicationRecord
-  has_many :memberships
-  has_many :users, :through => :memberships
   has_many :juke_tracks
+  has_many :memberships
+  has_many :users, through: :memberships
+
   validate :default_threshold
+
   after_touch :update_playlist
 
   def host
@@ -15,27 +17,21 @@ class Party < ApplicationRecord
     end
   end
 
-  def active_tracks
-    juke_tracks.where(active: true)
-  end
+  # def active_tracks
+  #   juke_tracks.where(active: true)
+  # end
 
-  def staged_tracks
-    juke_tracks.where(active: false)
-  end
+  # def staged_tracks
+  #   juke_tracks.where(active: false)
+  # end
 
   def update_playlist
     self.playlist.replace_tracks!(self.grab_active_tracks) unless self.playlist.total > 100
   end
 
   def grab_active_tracks
-    self.active_tracks.map do |juke_track|
+    self.juke_tracks.active.map do |juke_track|
       juke_track.track
-    end
-  end
-
-  def build_spotify_tracks
-    self.active_tracks.map do |juke_track|
-      RSpotify::Track.find(juke_track.track.spotify_id)
     end
   end
 
