@@ -1,0 +1,25 @@
+<ul class="list-group">
+<% if tracks %>
+  <% tracks.each do |track|  %>
+    <li class="list-group-item list-group-item-action">
+      <%= track.track.name %> : <font color=blue><%= track.points %></font>
+
+      <!-- Vote buttons -->
+      <span class='pull-xs-right'>
+      <%= link_to "/juke_tracks/#{track.id}/vote_up",
+                  class:"btn btn-success",
+                  role:"button" do %>
+          <span class="octicon octicon-arrow-up"></span>
+        <% end %>
+
+       <%= link_to "/juke_tracks/#{track.id}/vote_down",
+                    class:"btn btn-danger",
+                    role:"button" do %>
+        <span class="octicon octicon-arrow-down"></span>
+      <% end %>
+
+      </span>
+    </li>
+  <% end %>
+<% end %>
+</ul>

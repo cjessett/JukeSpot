@@ -18,6 +18,6 @@ class SessionsController < ApplicationController
 
   private
   def session_params
-    spotify_user.credentials.select{ |k,v| ["token", "refresh_token"].include? k }
+    spotify_user.credentials.select{ |key,val| ["token", "refresh_token"].include? key }
   end
 end
