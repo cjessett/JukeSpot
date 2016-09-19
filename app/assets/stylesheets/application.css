@@ -14,3 +14,41 @@
  *= require_self
  */
 
+.spotify-login {
+  margin-top: 5em;
+}
+
+#new-party {
+  outline: none;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 18px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.inline {
+  display: inline;
+}
+
+.header {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#button-header {
+  padding-top: 5em;
+  width: 5em;
+}
+
+#profile-title {
+  padding-top: 1em;
+}

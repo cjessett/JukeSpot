@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   resources :parties
-  patch '/parties/:id/new_playlist' => 'parties#new_playlist'
   patch '/parties/:id/import' => 'parties#import'
 
   get '/profile' => 'users#profile'

@@ -1,47 +1,63 @@
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-  <!-- Party Title -->
-  <h2><%= @party.name %></h2>
 
-  <!-- Created new playlist alert -->
-  <% if @party.spotify_playlist_id && @party.juke_tracks.empty? %>
-    <div class="row">
-      <div class="alert alert-success col-md-6 offset-md-3" role="alert">
-        Well done! Check your playlists on Spotify!
-      </div>
-    </div>
+<div class="row header">
 
-  <!-- Import and Create playlist buttons -->
-  <% elsif !@party.spotify_playlist_id %>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importPlaylistModal">
+  <!-- Import button -->
+  <div class="col-md-4 text-xs-center">
+    <button type="button" class="btn btn-primary btn-lg"
+            data-toggle="modal" data-target="#importPlaylistModal">
       Import Playlist
     </button>
-
-    <%= link_to 'Create A New Spotify Playlist',
-                "/parties/#{@party.id}/new_playlist",
-                class:"btn btn-success btn-lg",
-                role:"button", method:'patch' %>
-  <% end %>
   </div>
 
-  <!-- Party Tracks -->
-  <div class="row">
-    <!-- Staged Tracks -->
-    <div class="col-xs-6">
-      <h2>Staged</h2>
-      <%= render partial: "track_list", locals: {tracks: @party.staged_tracks} %>
-    </div>
-    <!-- Active tracks -->
-    <div class="col-xs-6">
-      <h2>Active</h2>
-      <%= render partial: "track_list", locals: {tracks: @party.active_tracks} %>
+  <!-- Party Title -->
+  <div class="col-md-4 text-xs-center">
+    <h1 class=""><%= @party.name %></h1>
+  </div>
+
+    <div class="col-md-4">
+    <div class="input-group input-group-lg">
+      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Action
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<hr>
+
+<!-- Created new playlist alert -->
+<% if flash[:notice] %>
+<div class="alert alert-success text-xs-center" role="alert">
+  <%= flash[:notice] %>
+</div>
+<% end %>
+
+<!-- Party Tracks -->
+<div class="row">
+
+  <!-- Staged Tracks -->
+  <div class="col-xs-6">
+    <h2>Staged</h2>
+    <%= render partial: "track_list", locals: {tracks: @party.staged_tracks} %>
+  </div>
+
+  <!-- Active tracks -->
+  <div class="col-xs-6">
+    <h2>Active</h2>
+    <%= render partial: "track_list", locals: {tracks: @party.active_tracks} %>
+  </div>
+</div>
 
 <!-- Import playlist Modal -->
-<div class="modal fade" id="importPlaylistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="importPlaylistModal"
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -54,14 +70,14 @@
       <% if spotify_user.playlists %>
         <ul class="list-group">
           <% spotify_user.playlists.each do |playlist| %>
-            <%= button_to playlist.name, {action: "import", party_id: @party.id },
+            <%= button_to playlist.name, {action: "import"},
                                           method: :patch,
                                           params: { playlist_id: playlist.id, owner_id: playlist.owner.id },
-                                          class:"list-group-item list-group-item-action" %></li>
+                                          class:"list-group-item list-group-item-action" %>
           <% end %>
         </ul>
       <% end %>
       </div>
+    </div>
   </div>
 </div>
-

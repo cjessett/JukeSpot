@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def spotify_user
-    @spotify_user ||= RSpotify::User.new(session[:spotify]) if session[:spotify]
+    @spotify_user ||= RSpotify::User.new session[:spotify] if session[:spotify]
   end
 
   # def require_login
