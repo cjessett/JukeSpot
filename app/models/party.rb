@@ -24,7 +24,7 @@ class Party < ApplicationRecord
   end
 
   def update_playlist
-    self.playlist.replace_tracks!(self.build_spotify_tracks)
+    self.playlist.replace_tracks!(self.grab_active_tracks) unless self.playlist.total > 100
   end
 
   def grab_active_tracks

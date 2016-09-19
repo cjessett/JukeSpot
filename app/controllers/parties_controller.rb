@@ -34,7 +34,7 @@ class PartiesController < ApplicationController
   end
 
   def import_track(track)
-    Track.find_or_create_by(spotify_id: track.id, name: track.name)
+    Track.find_or_create_by(spotify_id: track.id, name: track.name, uri: track.uri)
   end
 
   def add_to_party(imported_track)
