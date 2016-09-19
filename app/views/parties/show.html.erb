@@ -1,4 +1,3 @@
-
 <div class="row header">
 
   <!-- Import button -->
@@ -45,13 +44,13 @@
   <!-- Staged Tracks -->
   <div class="col-xs-6">
     <h2>Staged</h2>
-    <%= render partial: "track_list", locals: {tracks: @party.staged_tracks} %>
+    <%= render partial: "track_list", locals: {tracks: @party.juke_tracks.staged} %>
   </div>
 
   <!-- Active tracks -->
   <div class="col-xs-6">
     <h2>Active</h2>
-    <%= render partial: "track_list", locals: {tracks: @party.active_tracks} %>
+    <%= render partial: "track_list", locals: {tracks: @party.juke_tracks.active} %>
   </div>
 </div>
 
