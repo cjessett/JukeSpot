@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916202226) do
+ActiveRecord::Schema.define(version: 20160919024125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160916202226) do
 
   create_table "parties", force: :cascade do |t|
     t.string  "name"
-    t.integer "threshold"
+    t.integer "threshold",           default: 0
     t.string  "spotify_playlist_id"
     t.string  "playlist_owner_id"
   end
