@@ -73,47 +73,7 @@
 </div>
 
 <!-- Import playlist Modal -->
-<div class="modal fade" id="importPlaylistModal"
-     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Your Playlists</h4>
-      </div>
-      <div class="modal-body">
-      <% if spotify_user.playlists %>
-        <ul class="list-group">
-          <% spotify_user.playlists.each do |playlist| %>
-            <%= button_to playlist.name, {action: "import"},
-                                          method: :patch,
-                                          params: { playlist_id: playlist.id, owner_id: playlist.owner.id },
-                                          class:"list-group-item list-group-item-action" %>
-          <% end %>
-        </ul>
-      <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render partial: "import_playlist_modal" %>
 
-
-<!-- Admin Modal -->
-<div class="modal fade" id="adminModal"
-     tabindex="-1" role="dialog" aria-labelledby="adminModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="adminModalLabel">Dashboard</h4>
-      </div>
-      <div class="modal-body">
-        Dashboard stuff
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Admin modal -->
+<%= render partial: "admin_modal" %>
