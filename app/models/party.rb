@@ -30,4 +30,10 @@ class Party < ApplicationRecord
   def default_threshold
     self.threshold = self.threshold.nil? ? 0 : self.threshold
   end
+
+  def generate_invite_link
+    begin
+      self.invite_link = SecureRandom.hex(6)
+    end while self.class.exists?(invite_link: self.invite_link)
+  end
 end
