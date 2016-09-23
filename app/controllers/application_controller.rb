@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :require_login, except: [:home]
 
   def home
-    render 'home/index'
+    if current_user
+      redirect_to '/profile'
+    else
+      render 'home/index'
+    end
   end
 
   private

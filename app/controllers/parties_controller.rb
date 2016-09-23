@@ -1,5 +1,5 @@
 class PartiesController < ApplicationController
-  before_action :require_owner, except: [:new, :create]
+  before_action :require_member, except: [:new, :create]
 
   def new
   end
@@ -45,8 +45,8 @@ class PartiesController < ApplicationController
     .find_or_create_by(track_id: imported_track.id, active: true, import: true)
   end
 
-  def require_owner
-    unless current_user == Party.find(params[:id]).host
+  def require_member
+    unless Party.find(params[:id]).users.include? current_user
       redirect_to root_path
     end
   end

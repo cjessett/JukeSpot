@@ -6,6 +6,7 @@ class Party < ApplicationRecord
   validate :default_threshold
 
   after_touch :update_playlist
+  before_create :generate_invite_link
 
   def host
     memberships.where(host: true).first.user
@@ -35,5 +36,6 @@ class Party < ApplicationRecord
     begin
       self.invite_link = SecureRandom.hex(6)
     end while self.class.exists?(invite_link: self.invite_link)
+    self.save
   end
 end

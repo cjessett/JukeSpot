@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_or_create_by(spotify_id: spotify_user.id)
     user.update(session_params)
     session[:user_id] = user.id
-    redirect_to '/profile'
+    redirect_to request.referrer
   end
 
   def destroy
