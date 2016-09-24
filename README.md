@@ -1,24 +1,28 @@
-# README
+# JukeSpot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Install the dependencies
 
-Things you may want to cover:
+`bundle install`
 
-* Ruby version
+Create and migrate your database
 
-* System dependencies
+```
+rails db:create
+rails db:migrate
+```
 
-* Configuration
+You will need [to get Spotify credentials](https://developer.spotify.com/my-applications)
 
-* Database creation
+This app loads it's environment variables from a .env file with [dotenv](https://github.com/bkeepers/dotenv)
 
-* Database initialization
+create a `.env` file in the root of the project and add your keys:
 
-* How to run the test suite
+```
+CLIENT_ID=<YOUR_CLIENT_ID>
+CLIENT_SECRET=<YOUR_CLIENT_SECRET>
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Start it up
 
-* Deployment instructions
+`rails s`
 
-* ...

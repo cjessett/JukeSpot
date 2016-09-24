@@ -19,6 +19,9 @@
       Dashboard
     </button>
   </div>
+
+  <!-- Admin modal -->
+  <%= render partial: "admin_modal", locals: {party: @party} %>
   <% end %>
 
   <!-- Import button -->
@@ -75,5 +78,3 @@
 <!-- Import playlist Modal -->
 <%= render partial: "import_playlist_modal" %>
 
-<!-- Admin modal -->
-<%= render partial: "admin_modal", locals: {party: @party} %>
