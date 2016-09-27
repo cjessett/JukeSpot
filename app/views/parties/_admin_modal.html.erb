@@ -1,0 +1,19 @@
+<!-- Admin Modal -->
+<div class="modal fade" id="adminModal"
+     tabindex="-1" role="dialog" aria-labelledby="adminModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="adminModalLabel">Dashboard</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Party Invite Link</h2>
+        <input class="form-control" value="<%= "/join/#{party.invite_link}" %>" readonly>
+        <small id="" class="form-text text-muted">Share this link</small>
+      </div>
+    </div>
+  </div>
+</div>

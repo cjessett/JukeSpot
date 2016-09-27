@@ -32,7 +32,6 @@ gem 'rspotify', '~> 1.18.0'
 gem 'omniauth-spotify'
 
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

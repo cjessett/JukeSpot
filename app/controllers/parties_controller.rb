@@ -1,4 +1,6 @@
 class PartiesController < ApplicationController
+  before_action :require_member, except: [:new, :create]
+
   def new
   end
 
@@ -41,5 +43,11 @@ class PartiesController < ApplicationController
     @party
     .juke_tracks
     .find_or_create_by(track_id: imported_track.id, active: true, import: true)
+  end
+
+  def require_member
+    unless Party.find(params[:id]).users.include? current_user
+      redirect_to root_path
+    end
   end
 end

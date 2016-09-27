@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :spotify_user
+  before_action :require_login, except: [:home]
 
   def home
-    render 'home/index'
+    if current_user
+      redirect_to '/profile'
+    else
+      render 'home/index'
+    end
   end
 
   private
@@ -15,10 +20,10 @@ class ApplicationController < ActionController::Base
     @spotify_user ||= RSpotify::User.new session[:spotify] if session[:spotify]
   end
 
-  # def require_login
-  #   unless current_user
-  #     flash[:error] = "You  must be logged in to access this section"
-  #     redirect_to '/'
-  #   end
-  # end
+  def require_login
+    unless current_user
+      flash[:error] = "You  must be logged in to access this section"
+      redirect_to '/'
+    end
+  end
 end

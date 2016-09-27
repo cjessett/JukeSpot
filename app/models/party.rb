@@ -1,4 +1,7 @@
+require 'playlist_updater'
 class Party < ApplicationRecord
+  include PlaylistUpdater
+
   has_many :juke_tracks
   has_many :memberships
   has_many :users, through: :memberships
@@ -6,6 +9,7 @@ class Party < ApplicationRecord
   validate :default_threshold
 
   after_touch :update_playlist
+  before_create :generate_invite_link
 
   def host
     memberships.where(host: true).first.user
@@ -17,25 +21,22 @@ class Party < ApplicationRecord
     end
   end
 
-  # def active_tracks
-  #   juke_tracks.where(active: true)
-  # end
-
-  # def staged_tracks
-  #   juke_tracks.where(active: false)
-  # end
-
   def update_playlist
-    self.playlist.replace_tracks!(self.grab_active_tracks) unless self.playlist.total > 100
+    replace_tracks(self.grab_active_tracks, self) unless self.playlist.total > 100
   end
 
   def grab_active_tracks
-    self.juke_tracks.active.map do |juke_track|
-      juke_track.track
-    end
+    self.juke_tracks.active.map{ |juke_track| juke_track.track }
   end
 
   def default_threshold
     self.threshold = self.threshold.nil? ? 0 : self.threshold
+  end
+
+  def generate_invite_link
+    begin
+      self.invite_link = SecureRandom.hex(6)
+    end while self.class.exists?(invite_link: self.invite_link)
+    self.save
   end
 end
