@@ -32,12 +32,13 @@ module PlaylistUpdater
   end
 
   def send_it(party, path, *params)
-    self.send(:send_request, "put", path, *params)
-  rescue RestClient::Unauthorized => e
-    raise e if e.response !~ /access token expired/
-    self.refresh(party)
-    params[-1] = self.header(party)
-    self.send(:send_request, "put", path, *params)
+    begin
+      self.send(:send_request, "put", path, *params)
+    rescue
+      self.refresh(party)
+      params[-1] = self.header(party)
+      self.send(:send_request, "put", path, *params)
+    end
   end
 
   def send_request(verb, path, *params)
@@ -48,7 +49,7 @@ module PlaylistUpdater
     url << "?#{query}" if query
 
     begin
-      response = r
+      response = RestClient.send(verb, url, {}, *params)
     rescue RestClient::Unauthorized
       if @client_token
         authenticate(@client_id, @client_secret)
