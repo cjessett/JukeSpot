@@ -2,7 +2,7 @@ class MembershipsController < ApplicationController
   skip_before_action :require_login
 
   def new
-    @party = Party.find_by_invite_link params[:invite_link]
+    @party = Party.find_by invite_link: params[:invite_link]
   end
 
   def create
