@@ -1,4 +1,7 @@
+require 'playlist_updater'
 class Party < ApplicationRecord
+  include PlaylistUpdater
+
   has_many :juke_tracks
   has_many :memberships
   has_many :users, through: :memberships
@@ -19,13 +22,11 @@ class Party < ApplicationRecord
   end
 
   def update_playlist
-    self.playlist.replace_tracks!(self.grab_active_tracks) unless self.playlist.total > 100
+    replace_tracks(self.grab_active_tracks, self) unless self.playlist.total > 100
   end
 
   def grab_active_tracks
-    self.juke_tracks.active.map do |juke_track|
-      juke_track.track
-    end
+    self.juke_tracks.active.map{ |juke_track| juke_track.track }
   end
 
   def default_threshold
