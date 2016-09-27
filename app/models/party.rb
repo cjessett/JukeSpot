@@ -17,14 +17,6 @@ class Party < ApplicationRecord
     end
   end
 
-  # def active_tracks
-  #   juke_tracks.where(active: true)
-  # end
-
-  # def staged_tracks
-  #   juke_tracks.where(active: false)
-  # end
-
   def update_playlist
     self.playlist.replace_tracks!(self.grab_active_tracks) unless self.playlist.total > 100
   end

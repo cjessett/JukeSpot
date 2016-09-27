@@ -1,12 +1,12 @@
 require_relative 'boot'
-require 'pry'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-Dotenv.load
+Dotenv.load if defined? Dotenv
+
 RSpotify::authenticate(ENV['CLIENT_ID'], ENV['CLIENT_SECRET'])
 
 module JukeSpot
