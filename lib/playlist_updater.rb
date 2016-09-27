@@ -34,6 +34,7 @@ module PlaylistUpdater
   def send_it(party, path, *params)
     begin
       self.send(:send_request, "put", path, *params)
+    # rescue for expired token
     rescue
       self.refresh(party)
       params[-1] = self.header(party)
