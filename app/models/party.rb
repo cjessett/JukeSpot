@@ -1,4 +1,5 @@
 require 'playlist_updater'
+
 class Party < ApplicationRecord
   include PlaylistUpdater
 
@@ -7,6 +8,8 @@ class Party < ApplicationRecord
   has_many :users, through: :memberships
 
   validate :default_threshold
+  validates_uniqueness_of :invite_link
+  validates_presence_of :invite_link
 
   after_touch :update_playlist
   before_create :generate_invite_link
@@ -34,9 +37,9 @@ class Party < ApplicationRecord
   end
 
   def generate_invite_link
-    begin
-      self.invite_link = SecureRandom.hex(6)
-    end while self.class.exists?(invite_link: self.invite_link)
-    self.save
+    while !self.valid?
+      self.invite_link = SecureRandom.hex 6
+      self.save
+    end
   end
 end
