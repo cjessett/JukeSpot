@@ -7,12 +7,10 @@ class Party < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
 
-  validate :default_threshold
-  validates_uniqueness_of :invite_link
-  validates_presence_of :invite_link
-
   after_touch :update_playlist
-  before_create :generate_invite_link
+  before_create :generate_invite_link, :default_threshold
+
+  validates_uniqueness_of :invite_link
 
   def host
     memberships.where(host: true).first.user
@@ -37,9 +35,6 @@ class Party < ApplicationRecord
   end
 
   def generate_invite_link
-    while !self.valid?
-      self.invite_link = SecureRandom.hex 6
-      self.save
-    end
+    self.invite_link = SecureRandom.hex 6
   end
 end
