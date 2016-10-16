@@ -31,6 +31,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'rspotify', '~> 1.18.0'
 gem 'omniauth-spotify'
 
+gem 'bootstrap', '~> 4.0.0.alpha4'
+
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
